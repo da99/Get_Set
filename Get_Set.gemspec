@@ -8,8 +8,11 @@ Gem::Specification.new do |s|
   s.authors     = ["da99"]
   s.email       = ["i-hate-spam-45671204@mailinator.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{An alternative to :attr_accessor}
+  s.description = %q{
+    Creates instance method that can both get or set an instance variable.  
+  It's like squeezing :attr_writer into :attr_reader.
+  }
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
@@ -22,5 +25,5 @@ Gem::Specification.new do |s|
   
   # s.rubyforge_project = "Get_Set"
   # specify any dependencies here; for example:
-  # s.add_runtime_dependency "rest-client"
+  s.add_runtime_dependency "Checked"
 end

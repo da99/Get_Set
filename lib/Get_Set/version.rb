@@ -1,3 +1,3 @@
-class Get_Set
+module Get_Set
   VERSION = "0.0.1"
 end
