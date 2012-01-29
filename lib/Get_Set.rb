@@ -7,6 +7,27 @@ module Get_Set
     
     include Checked::DSL
 
+    def self.included klass
+      klass.extend Class_Methods
+    end
+
+    module Class_Methods
+      
+      include Checked::DSL
+      
+      def attr_get_set *names
+        Array!(names).symbols!
+        names.each { |n|
+          class_eval %~
+            def #{n} *args
+              Get_Set! :@#{n}, *args
+            end
+          ~, __FILE__, __LINE__
+        }
+      end
+      
+    end # === module Class_Methods
+    
     def Get_Set! *args
       Size! args, 1..2
       name = args.shift

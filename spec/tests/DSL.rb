@@ -2,7 +2,7 @@
 
 describe "Get_Set! :@var" do
   
-  behaves_like :dsl
+  before { extend Get_Set::DSL }
   
   it 'raises ArgumentError if instance variable has not been initialized.' do
     lambda { Get_Set! :@something }
@@ -19,7 +19,7 @@ end # === describe Get_Set!
 
 describe "Get_Set! :@var, var" do
   
-  behaves_like :dsl
+  before { extend Get_Set::DSL }
   
   it 'raises ArgumentError if instance variable has not been initialized.' do
     lambda { Get_Set! :@someg, :hi}
@@ -39,3 +39,18 @@ describe "Get_Set! :@var, var" do
   end
   
 end # === describe Get_Set!
+
+describe ":attr_get_set :name" do
+  
+  before { @klass = Klass.new }
+
+  it 'defines method to retrieve value' do
+    @klass.name.should == 'Ultra Force'
+  end
+  
+  it 'defines method to set value' do
+    @klass.name(:Ultra)
+    @klass.name.should == :Ultra
+  end
+  
+end # === describe :attr_get_set :name
