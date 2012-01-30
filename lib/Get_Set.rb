@@ -20,6 +20,7 @@ module Get_Set
         names.each { |n|
           class_eval %~
             def #{n} *args
+              instance_variable_set( :@#{n}, nil ) unless instance_variable_defined?(:@#{n})
               Get_Set! :@#{n}, *args
             end
           ~, __FILE__, __LINE__

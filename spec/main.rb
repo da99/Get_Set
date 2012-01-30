@@ -6,7 +6,7 @@ require 'Bacon_Colored'
 Klass = Class.new {
   
   include Get_Set::DSL
-  attr_get_set :name
+  attr_get_set :name, :location
 
   def initialize 
     @name = 'Ultra Force'

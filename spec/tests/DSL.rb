@@ -53,4 +53,8 @@ describe ":attr_get_set :name" do
     @klass.name.should == :Ultra
   end
   
+  it 'initializes variable to nil if not defined' do
+    @klass.location.should == nil
+  end
+  
 end # === describe :attr_get_set :name
