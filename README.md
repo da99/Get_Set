@@ -17,9 +17,9 @@ Use:
     require "Get_Set"
 
     class Uni_Bash
-      extend Get_Set
+      include Get_Set::DSL
 
-      get_set :name, :age
+      attr_get_set :name, :age
     end
 
 
