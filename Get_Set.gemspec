@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Get_Set::VERSION
   s.authors     = ["da99"]
   s.email       = ["i-hate-spam-45671204@mailinator.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/da99/Get_Set"
   s.summary     = %q{An alternative to :attr_accessor}
   s.description = %q{
     Creates instance method that can both get or set an instance variable.  
