@@ -22,8 +22,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bacon"
   s.add_development_dependency "rake"
   s.add_development_dependency 'Bacon_Colored'
+  s.add_development_dependency 'pry'
   
   # s.rubyforge_project = "Get_Set"
   # specify any dependencies here; for example:
-  s.add_runtime_dependency "Checked"
+  # s.add_runtime_dependency "Checked"
 end

@@ -1,60 +1,67 @@
 
+class Klassy
 
-describe "Get_Set! :@var" do
-  
-  before { extend Get_Set::DSL }
-  
-  it 'raises ArgumentError if instance variable has not been initialized.' do
-    lambda { Get_Set! :@something }
-    .should.raise(ArgumentError)
-    .message.should.match %r!@something has not been defined!
+  include Get_Set::DSL
+  attr_get_set :name, :notify, :location
+
+  def initialize 
+    @name = 'Ultra Force'
   end
   
-  it 'gets instance variable if array is empty.' do
-    @server = :hi
-    Get_Set!( :@server ).should == @server
-  end
-  
-end # === describe Get_Set!
+end # === Klassy
 
-describe "Get_Set! :@var, var" do
+describe "attr_get_set :var" do
   
-  before { extend Get_Set::DSL }
+  before { @klass = Klassy.new }
   
-  it 'raises ArgumentError if instance variable has not been initialized.' do
-    lambda { Get_Set! :@someg, :hi}
-    .should.raise(ArgumentError)
-    .message.should.match %r!@someg has not been defined!
+  it 'gets instance variable if no arguments given' do
+    t = 'Screaming Viking'
+    o = @klass
+    o.name t
+    o.name.should == t
   end
   
   it 'sets instance variable.' do
-    @server = :hi
-    Get_Set!( :@server, :bye)
-    @server.should == :bye
+    t = 'Quite Viking'
+    o = @klass
+    o.name t
+    o.instance_eval { @name }.should == t
   end
   
-  it 'returns last value' do
-    @server = :hi
-    Get_Set!( :@server, :bye ).should == :bye
+  it 'saves more than one argument as Array' do
+    t = [ :a, :b, :c]
+    @klass.name *t
+    @klass.name.should == t
   end
   
-end # === describe Get_Set!
-
-describe ":attr_get_set :name" do
-  
-  before { @klass = Klass.new }
-
   it 'defines method to retrieve value' do
     @klass.name.should == 'Ultra Force'
   end
   
   it 'defines method to set value' do
-    @klass.name(:Ultra)
+    @klass.name :Ultra
     @klass.name.should == :Ultra
   end
   
   it 'initializes variable to nil if not defined' do
     @klass.location.should == nil
+  end
+
+  it 'saves proc given given to setter as its value' do
+    @klass.location {}
+    @klass.location.is_a?(Proc).should == true
+  end
+
+  it "saves value and proc given to setter as an array" do
+    b = Proc.new { :b }
+    @klass.location(:a, &b)
+    @klass.location.should == [:a, b]
+  end
+  
+  it "saves values and proc given to setter as an array within an array" do
+    c = Proc.new { :c }
+    @klass.location(:a, :b, &c)
+    @klass.location.should == [[:a, :b], c]
   end
   
 end # === describe :attr_get_set :name

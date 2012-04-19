@@ -17,29 +17,27 @@ Use:
     require "Get_Set"
 
     class Uni_Bash
+    
       include Get_Set::DSL
 
-      attr_get_set :name, :age
+      attr_get_set :name, :age, :homes, :var_and_block, :vars_and_block
+      
     end
 
-
     o = Uni_Bash.new
-    
+
     # --- Setters
     o.name "Uncle Martin"     
     o.age  190
-    
+    o.homes "Mars", "California"
+    o.var_and_block(:a) { :b }
+    o.vars_and_block(:a, :b, :c) { :d }
+
     # ---- Getters
-    o.name             
-    o.age             
-
-
-Note
-----
-
-If you now of another gem that does the same thing, let me
-know through github: "Edit this file", submit project issue, or
-send me a message.  I always love to make my stuff obsolete so I can delete
-it and use something better.
+    o.name           # --> 'Uncle Martin
+    o.age            # --> 190
+    o.homes          # --> [ 'Mars', 'California' ]
+    o.var_and_block  # --> [ :a, Proc Instance ]
+    o.vars_and_block # --> [ [:a, :b, :c], Proc Instance ]</pre>
 
 
